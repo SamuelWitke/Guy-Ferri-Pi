@@ -1,18 +1,18 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
-const Player = require('player');
-let player = new Player('./SONG MADE FROM GUY FIERI SOUNDS (FLAVORTOWN REMIX).mp3');
-
-
+const stream = require('youtube-audio-stream')
+const url = 'https://www.youtube.com/watch?v=CwqGhL-v6Is'
+const decoder = require('lame').Decoder
+const speaker = new require('speaker')
 
 let app = express();
 app.get('/', (req, res) => {
-  res.send('Ferri server started');
-  player.play(function(err, player){
-    console.log('playend!');
-  });
+    stream(url)
+        .pipe(decoder())
+        .pipe(speaker())
+    res.send('Ferri server started');
 });
 
 app.listen(PORT, () => {
-	    console.log(`Doorbell listening on port ${PORT}`);
+    console.log(`Doorbell listening on port ${PORT}`);
 });
