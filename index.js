@@ -1,18 +1,18 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
-const stream = require('youtube-audio-stream')
-const url = 'https://www.youtube.com/watch?v=CwqGhL-v6Is'
-const decoder = require('lame').Decoder
-const speaker = new require('speaker')
-
+const Player = require('player');
 let app = express();
+let player = new Player('./Guy Fieri Saying Flavortown.mp3');
+
 app.get('/', (req, res) => {
-    stream(url)
-        .pipe(decoder())
-        .pipe(speaker())
-    res.send('Ferri server started');
+	try {
+		player.play();
+	} catch(err) {
+		console.log(err);
+	}
+	res.send('Ferri server started');
 });
 
 app.listen(PORT, () => {
-    console.log(`Doorbell listening on port ${PORT}`);
+	console.log(`Doorbell listening on port ${PORT}`);
 });

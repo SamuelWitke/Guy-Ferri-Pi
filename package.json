@@ -19,8 +19,6 @@
   "homepage": "https://github.com/SamuelWitke/Guy-Ferri-Pi#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "lame": "^1.2.4",
-    "speaker": "^0.4.0",
-    "youtube-audio-stream": "0.0.50"
+    "player": "^0.6.1"
   }
 }
